@@ -3,18 +3,29 @@ import './App.css';
 import {useState, useEffect} from 'react'
 import 'axios'
 import axios from 'axios';
+import configProd from './config.prod';
+import configDev from './config.dev';
+
+let BASE_URL = ""
+
+if (process.env.NODE_ENV == 'production') {
+  BASE_URL = configProd.BASE_URL
+} else {
+  BASE_URL = configDev.BASE_URL
+}
 
 function App() {
   const [backendHealthy, setBackendHealthy] = useState("not ok")
 
   useEffect(()=>{
     const intervalId = setInterval(async () => {  //assign interval to a variable to clear it.
-      const resp = await axios.get("http://localhost:8000")
+      console.log(process.env)
+      console.log(BASE_URL)
+      const resp = await axios.get(`${BASE_URL}/api/health`)
 
-      setBackendHealthy(resp.data?.healthy || "not ok")
-      console.log(backendHealthy)
+      setBackendHealthy(resp.data?.health || "not ok")
 
-    }, 5000)
+    }, 1000)
     
     return () => clearInterval(intervalId); //This is important
   },[])
@@ -24,8 +35,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
-          Backend Healthy: {backendHealthy}
+          Backend Health: {backendHealthy}
         </p>
         <a
           className="App-link"

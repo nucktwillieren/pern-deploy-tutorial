@@ -6,9 +6,9 @@ const port = 8000
 
 app.use(cors())
 
-app.get('/', (req, res) => {
+app.get('/api/health', (req, res) => {
   res.json({
-    healthy: 'ok'
+    health: 'ok'
   })
 })
 

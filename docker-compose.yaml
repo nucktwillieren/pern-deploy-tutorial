@@ -4,10 +4,10 @@ services:
     networks:
       - default
     ports:
-      - 80:80
+      - 38000:80
     volumes:
       - ./nginx:/etc/nginx/conf.d
-      - ./frontend/build:/www/web
+      # - ./frontend/build:/www/web
     depends_on:
       - backend
       - frontend
