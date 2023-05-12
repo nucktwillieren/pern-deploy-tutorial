@@ -1,0 +1,18 @@
+services:
+  nginx:
+    image: nginx:1.23.1-alpine
+    networks:
+      - default
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./frontend/build:/www/web
+    depends_on:
+      - backend
+      - frontend
+  backend:
+    build: ./backend
+  frontend:
+    build: ./frontend
+    
