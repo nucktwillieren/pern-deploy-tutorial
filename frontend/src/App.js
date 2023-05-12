@@ -8,7 +8,7 @@ import configDev from './config.dev';
 
 let BASE_URL = ""
 
-if (process.env.NODE_ENV == 'production') {
+if (process.env.NODE_ENV === 'production') {
   BASE_URL = configProd.BASE_URL
 } else {
   BASE_URL = configDev.BASE_URL
