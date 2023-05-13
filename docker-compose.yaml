@@ -11,8 +11,11 @@ services:
     depends_on:
       - backend
       - frontend
+    restart: always
   backend:
-    build: ./backend
+    image: wuretks.azurecr.io/nucktwillieren/pern-tutorial-backend:latest
+    # build: ./backend
   frontend:
-    build: ./frontend
+    image: wuretks.azurecr.io/nucktwillieren/pern-tutorial-frontend:latest
+    # build: ./frontend
     
